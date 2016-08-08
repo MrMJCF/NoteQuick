@@ -1,0 +1,118 @@
+<div id="navbar">
+    <div id="logo">
+        <%= image_tag 'logo.png' %>
+        <div id="name">
+            <div class="notequick">
+            QuickNote
+            </div>
+            <div class="bymateo">
+            By Mateo C.
+            </div>
+        </div>
+    </div>
+    <a class="toggle">&#9776;</a>
+    <div class="links">
+        <%= link_to('Sign In', new_user_session_path) %>
+        <%= link_to('Sign Up', new_user_registration_path, class: 'trybutton') %>
+        <a href="/pages/home">Home</a>
+        <a href="/pages/about">About</a>
+        <a href="/pages/gettingstarted">Getting Started</a>
+        <a class="notice"><%= notice %></a>
+        <a class="alert"><%= alert %></a>
+    </div>
+</div>
+<div id="introcontainer">
+    <div class="intro">
+        <div class="homeintro">
+            <div class="desc">
+             <h1>THE ULTIMATE WAY TO</h1>
+             <h1>SHARE NOTES</h1>
+             <p>A new professional utility for sharing and creating notes</p>
+            </div>
+            <div class="options">
+                <%= link_to('Sign Up', new_user_registration_path, class: 'trybutton') %>
+                <!--<a href="">Not convinced?</a>-->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="shots">
+        <%= image_tag 'phonedit.png' %>
+        <div class="shot">
+            <h1>Community</h1>
+            <p>    
+            You can use other users' notes. 
+            Other users can make notes for
+            you to read and study. 
+            </p>
+        </div>
+
+        <div class="shot">
+            <h1>Categories</h1>
+            <p>
+            Categories can be used to explore notes from other users
+            and organize your notes.
+            </p>
+        </div>
+        
+        <div class="shot">
+            <h1>Clean Interface</h1>
+            <p>
+            The user interface is clean and distinctive which makes creating and sharing notes a breeze.
+            </p>
+        </div>    
+        <div class="clearer"></div>
+</div>
+<div class="count">
+    WITH OVER <span><%= User.all.size %></span> 
+    USERS CREATING <span><%= Note.all.size %></span> NOTES!
+</div>
+<div class="features">
+    <h1>Still unsure? Here are more features.</h1>
+    <h2>You would never believe how helpful these features are.</h2>
+    <div class="container">
+        <div class="box">
+            <h3>Search<%= image_tag 'Search.png' %></h3>
+            <p>
+               You can search for other user's notes. 
+               Convenient for when you don't have the notes
+               or resources needed. 
+            </p>
+        </div>
+
+        <div class="box">
+            <h3>Fast<%= image_tag 'database.svg' %></h3>
+            <p>
+               Speed is key. NoteQuick tries to make the best
+               experience possible by making sure there are no
+               bottlenecks or bugs in our back-end code.
+            </p>
+        </div>
+        <div class="box">
+            <h3>Everybody<%= image_tag 'users.svg' %></h3>
+            <p>
+              <em>NoteQuick is not only for students and teachers.</em>
+              NoteQuick is for anybody and <em>everybody</em> 
+              who wants to share and make notes.
+            </p>
+        </div>
+        <div class="clearer"></div>
+    </div>
+</div>
+<div class="signupbox">
+    Sign up <span>😄</span> <%= link_to('here!', new_user_registration_path, class: 'trybutton') %>
+</div>
+<footer>
+    <a>Mateo C. 2016 - 2016</a>
+    <a href="/pages/home">Home</a>
+    <a href="/pages/about">About</a>
+    <a href="/pages/gettingstarted">Getting Started</a>
+    <%= image_tag 'logo.png' %>
+</footer>
+<script>
+$(document).ready(function() {
+    $(".toggle").click(function() {
+        $(".links").slideToggle("fast");
+    });
+});
+</script>

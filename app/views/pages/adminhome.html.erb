@@ -1,0 +1,29 @@
+<section id="adminhome">
+    <h1>Admin Dashboard</h1>
+        <div id="catcontainer">
+            <%= link_to "New Category", new_category_path %>
+            <% Category.all.each do |c| %>
+                <span>
+                    <%= link_to c.name, notes_path(category: c.name) %>
+                    <%= link_to '<div class="glyphicon glyphicon-remove"></div>'.html_safe, c, data: { confirm: 'Are you sure?' }, :method => :delete %>
+                    <%= link_to '<div class="glyphicon glyphicon-edit"></div>'.html_safe, edit_category_path(c) %>
+                </span>
+            <% end %>
+        </div>
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>ID/Profile</th>
+                <th>IMAGE</th>
+                <th>Signin</th>
+            </tr>
+            <% User.all.each do |u| %>
+            <tr>
+                <th><%= u.username %></th>
+                <th><a href="/users/<%= u.id %>"><%= u.id %></a></th>
+                <th><img width="50" src="<%= u.profilepic %>"></th>
+                <th><%= link_to "Sign in as User", user_sign_path(u.id) %></th>
+            </tr>
+            <% end %>
+        </table>
+</section>

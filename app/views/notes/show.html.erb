@@ -1,0 +1,30 @@
+<section>
+    <div id="titleshow">
+    <%= @note.title %><br>
+    By: <%= @note.user.username %> <br>
+    Category: 
+        <% if @note.category %>
+            <%= @note.category.name %>
+        <% end %>
+    </div><br>
+    <div id="notesshow"><%= simple_format(@note.notes, :style => "word-wrap:break-word") %></div>
+    <div id="editback">
+    <% if @note.user == current_user || current_user.admin? %>
+        <%= link_to 'Edit', edit_note_path(@note) %>
+    <% end %>
+    
+    <%= link_to upvote_note_path(@note), method: :put do %><!--
+    --><button class="btn-circle">
+        <i class="glyphicon glyphicon-thumbs-up"></i>
+    </button><!--
+    --><%= @note.get_upvotes.size %><% end %>
+    
+    <%= link_to downvote_note_path(@note), method: :put do %><!--
+    --><button class="btn-circle">
+        <i class="glyphicon glyphicon-thumbs-down"></i>
+    </button><!--     
+    --><%= @note.get_downvotes.size %><% end %>
+    
+    <%= link_to 'Back', notes_path %>
+    </div>
+</section>

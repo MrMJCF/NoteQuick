@@ -1,0 +1,55 @@
+<section>
+    <div id="notecontainer">
+        <h1><%= params[:category] %> Notes</h1>
+        <% @notes.each do |note| %>
+            <div class="note">
+                
+                <span class="title"><%= truncate(note.title, :chars => 30) %>&nbsp;&nbsp;</span>
+                
+                <div class="notes"><em><%= truncate(note.notes, :chars => 50) %></em></div>
+    
+                <button class="btn-circle">
+                    <%= link_to '<div class="glyphicon glyphicon-user"></div>'.html_safe, note.user, :class => 'btn btn-default' %>
+                </button>
+                
+                <button class="btn-circle">
+                    <%= link_to '<span class="glyphicon glyphicon-new-window"></span>'.html_safe, note, :class => 'btn btn-default' %>
+                </button>
+                
+                <div class="likeratio"><%= note.get_upvotes.size %> : <%= note.get_downvotes.size %></div>
+                
+                <% if note.user == current_user || current_user.admin? %>
+                    <button class="btn-circle">
+                        <%= link_to '<span class="glyphicon glyphicon-edit"></span>'.html_safe, edit_note_path(note), :class => 'btn btn-default' %>
+                    </button>
+                    
+                    <button class="btn-circle">
+                        <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, note, :class => 'btn btn-default', data: { confirm: 'Are you sure?' }, :method => :delete %>
+                    </button>
+                <% end %>
+                
+            </div>
+        <% end %>
+        <br>
+        <%= will_paginate @notes, :page_links => false, next_label: 'Older, but still valuable', previous_label: 'More recent';  %>
+        <% if @notes.blank? %>
+        <h2>Sorry! No Notes Found That Match Queries</h2>
+        <% end %>
+    </div>
+    <div id="recommended">
+        <h1>Categories</h1>
+        <div class="sidebar">
+            <p>Please inform us for the expansion of categories</p>
+            <hr style="
+            display: block;
+            height: 1px;
+            border: 0;
+            border-top: 1px solid #333;
+            padding: 0; ">
+                <% Category.all.each do |category| %>
+                    <span><%= link_to category.name, notes_path(category: category.name) %></span>
+                <% end %>
+            <!--<a href="/users/sign_up" id="signupbutton">Sign Up!</a>-->
+        </div>
+    </div>
+</section>

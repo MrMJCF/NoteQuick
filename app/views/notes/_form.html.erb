@@ -1,0 +1,44 @@
+<%= form_for @note, :html => { :multipart => true, :id => "noteform"} do |f| %>
+    <% if @note.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+      <h3><%= pluralize(@note.errors.count, "error") %> stopped this note from being saved:</h3>
+      <% @note.errors.full_messages.each do |message| %>
+        <%= message %>
+      <% end %>
+    </div>
+    <% end %>
+
+    <!--<%= f.label :title %><br>-->
+    
+    <%= f.text_field :title, 
+    :id => "formtitle", :placeholder => 'Enter title'  %><br>
+
+    <%= f.label :category %>
+    <%= f.select :category_id, @categories, prompt: "Select category" %><br>
+    
+    <!--<% Category.all.each do |c| %>-->
+    <!--  <%= f.radio_button :category_id, c.id %>-->
+    <!--  <%= f.label :category_id, c.name %>-->
+    <!--<% end %>-->
+    
+    <!--<%= f.label :notes %><br>-->
+    
+    <%= f.text_area :notes, :placeholder => 'Enter notes', :style => 
+    "
+    width: 100%;
+    height: 400px;
+    ", 
+    :id => "enternotesform" %>
+    
+    <%= f.submit :class => 'submitbutton' %>
+    
+    <div id="tips">
+      <ul>
+        <li>Enter all fields, even if it isn't complete. Otherwise, your notes might erase if you try to submit them.</li>
+        <li>Make the notes easy to read, it will help you and others.</li>
+        <li>Name it something that would be easy to search for.</li>
+        <li>Take notes with context, it will make the notes easier to understand.</li>
+      </ul>
+    </div>
+    
+<% end %>
